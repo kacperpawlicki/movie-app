@@ -1,16 +1,9 @@
 # movie_app
 
-A new Flutter project.
+A Flutter app for browsing popular movies, TV shows, and actors, with search and offline favorites. Built as a learning project to practice clean architecture, BLoC, and dependency injection in Flutter.
 
-## Getting Started
+Data provided by The Movie Database (TMDB).
 
-This project is a starting point for a Flutter application.
+### Status
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Work in progress — early development stage.
