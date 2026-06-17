@@ -1,13 +1,11 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movie_app/features/home/presentation/screens/home_screen.dart';
 
 final router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) {
-        return Scaffold(body: Text('hello'),);
-      },
+      builder: (context, state) => HomeScreen()
     )
   ]
 );

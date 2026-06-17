@@ -23,6 +23,8 @@ import 'package:movie_app/features/movies/domain/repositories/movie_repository.d
     as _i512;
 import 'package:movie_app/features/movies/domain/usecases/get_popular_movies_usecase.dart'
     as _i671;
+import 'package:movie_app/features/movies/presentation/bloc/popular_movies_preview/popular_movies_preview_bloc.dart'
+    as _i1028;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -44,6 +46,10 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i671.GetPopularMoviesUseCase>(
       () => _i671.GetPopularMoviesUseCase(gh<_i512.MovieRepository>()),
+    );
+    gh.factory<_i1028.PopularMoviesPreviewBloc>(
+      () =>
+          _i1028.PopularMoviesPreviewBloc(gh<_i671.GetPopularMoviesUseCase>()),
     );
     return this;
   }
