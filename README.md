@@ -6,4 +6,4 @@ Data provided by The Movie Database (TMDB).
 
 ### Status
 
-Work in progress — early development stage.
+Work in progress - early development stage.
