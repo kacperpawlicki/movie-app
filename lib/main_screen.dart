@@ -32,7 +32,7 @@ class _MainScreenState extends State<MainScreen> {
           _currentIndex = index;
         }),
         selectedItemColor: Theme.of(context).colorScheme.primary,
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
             label: 'Home',
@@ -47,7 +47,10 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ],
       ),
-      body: _screens[_currentIndex],
+      body: Padding(
+        padding: EdgeInsetsGeometry.only(left: 16, right: 16, top: 8),
+        child: _screens[_currentIndex],
+      ),
     );
   }
 }

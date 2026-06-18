@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/injection/injection.dart';
+import 'package:movie_app/core/widgets/media_card.dart';
 import 'package:movie_app/features/movies/domain/entities/movie.dart';
 import 'package:movie_app/features/movies/presentation/bloc/popular_movies_preview/popular_movies_preview_bloc.dart';
 
@@ -10,25 +11,57 @@ class PopularMoviesPreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<PopularMoviesPreviewBloc>()..add(PopularMoviesPreviewEvent.moviesRequested()),
+      create: (context) =>
+          getIt<PopularMoviesPreviewBloc>()
+            ..add(PopularMoviesPreviewEvent.moviesRequested()),
       child: BlocBuilder<PopularMoviesPreviewBloc, PopularMoviesPreviewState>(
         builder: (context, state) {
           return state.when(
-            loading: () => const Center(child: CircularProgressIndicator()), 
-            loaded: (List<Movie> movies) => SizedBox(
-              height: 250,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: movies.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsetsGeometry.all(15),
-                    child: Text(movies[index].title),
-                  );
-                },
-              ),
-            ), 
-            error: (String message) => Text('Error: $message')
+            loading: () => const SizedBox(
+              height: 280,
+              child: Center(child: CircularProgressIndicator()),
+            ),
+            loaded: (List<Movie> movies) => Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Popular Movies',
+                      style: TextStyle(
+                        fontSize: 27,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'SEE MORE',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.secondary
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10,),
+                SizedBox(
+                  height: 280,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: movies.length,
+                    itemBuilder: (context, index) {
+                      return MediaCard(
+                        title: movies[index].title,
+                        voteAverage: movies[index].voteAverage,
+                        imagePath: movies[index].posterPath,
+                        onTap: () {},
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+            error: (String message) => Text('Error: $message'),
           );
         },
       ),

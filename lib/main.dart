@@ -13,6 +13,7 @@ void main() async{
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
       themeMode: ThemeMode.system,
+      debugShowCheckedModeBanner: false,
     )
   );
 }
