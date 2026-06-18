@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:movie_app/core/injection/injection.dart';
 import 'package:movie_app/core/widgets/media_card.dart';
 import 'package:movie_app/features/movies/domain/entities/movie.dart';
@@ -33,29 +34,40 @@ class PopularMoviesPreview extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(
-                      'SEE MORE',
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.secondary
+                    TextButton(
+                      onPressed: () {
+                        context.push('/movies/popular');
+                      },
+                      child: Text(
+                        'SEE MORE',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.secondary,
+                        ),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 10,),
+                SizedBox(height: 10),
                 SizedBox(
                   height: 280,
-                  child: ListView.builder(
+                  child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     itemCount: movies.length,
                     itemBuilder: (context, index) {
-                      return MediaCard(
-                        title: movies[index].title,
-                        voteAverage: movies[index].voteAverage,
-                        imagePath: movies[index].posterPath,
-                        onTap: () {},
+                      return SizedBox(
+                        width: 160,
+                        child: MediaCard(
+                          title: movies[index].title,
+                          voteAverage: movies[index].voteAverage,
+                          imagePath: movies[index].posterPath,
+                          onTap: () {},
+                        ),
                       );
+                    },
+                    separatorBuilder: (context, index) {
+                      return const SizedBox(width: 12);
                     },
                   ),
                 ),

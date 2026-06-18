@@ -24,7 +24,10 @@ class _MainScreenState extends State<MainScreen> {
             fontWeight: FontWeight.w900,
             fontSize: 30
           ),
-        )
+        ),
+        actions: [
+          IconButton(onPressed: (){}, icon: Icon(Icons.settings))
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
@@ -43,7 +46,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite_outline),
-            label: 'Favorite',
+            label: 'Favourites',
           ),
         ],
       ),
