@@ -62,7 +62,9 @@ class PopularMoviesPreview extends StatelessWidget {
                           title: movies[index].title,
                           voteAverage: movies[index].voteAverage,
                           imagePath: movies[index].posterPath,
-                          onTap: () {},
+                          onTap: () {
+                            context.push('/movies/details/${movies[index].id}');
+                          },
                         ),
                       );
                     },

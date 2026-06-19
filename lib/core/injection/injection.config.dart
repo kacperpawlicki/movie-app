@@ -25,6 +25,8 @@ import 'package:movie_app/features/movies/domain/usecases/get_movie_details_usec
     as _i864;
 import 'package:movie_app/features/movies/domain/usecases/get_popular_movies_usecase.dart'
     as _i671;
+import 'package:movie_app/features/movies/presentation/bloc/movie_details_bloc/movie_details_bloc.dart'
+    as _i741;
 import 'package:movie_app/features/movies/presentation/bloc/popular_movies_preview/popular_movies_preview_bloc.dart'
     as _i1028;
 import 'package:movie_app/features/movies/presentation/bloc/popular_movies_screen/popular_movies_screen_bloc.dart'
@@ -60,6 +62,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i128.PopularMoviesScreenBloc>(
       () => _i128.PopularMoviesScreenBloc(gh<_i671.GetPopularMoviesUseCase>()),
+    );
+    gh.factory<_i741.MovieDetailsBloc>(
+      () => _i741.MovieDetailsBloc(gh<_i864.GetMovieDetailsUseCase>()),
     );
     return this;
   }
