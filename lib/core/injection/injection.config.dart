@@ -21,6 +21,8 @@ import 'package:movie_app/features/movies/data/repositories/movie_repository_imp
     as _i1041;
 import 'package:movie_app/features/movies/domain/repositories/movie_repository.dart'
     as _i512;
+import 'package:movie_app/features/movies/domain/usecases/get_movie_details_usecase.dart'
+    as _i864;
 import 'package:movie_app/features/movies/domain/usecases/get_popular_movies_usecase.dart'
     as _i671;
 import 'package:movie_app/features/movies/presentation/bloc/popular_movies_preview/popular_movies_preview_bloc.dart'
@@ -45,6 +47,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i512.MovieRepository>(
       () => _i1041.MovieRepositoryImpl(gh<_i40.MovieRemoteDatasource>()),
+    );
+    gh.factory<_i864.GetMovieDetailsUseCase>(
+      () => _i864.GetMovieDetailsUseCase(gh<_i512.MovieRepository>()),
     );
     gh.factory<_i671.GetPopularMoviesUseCase>(
       () => _i671.GetPopularMoviesUseCase(gh<_i512.MovieRepository>()),

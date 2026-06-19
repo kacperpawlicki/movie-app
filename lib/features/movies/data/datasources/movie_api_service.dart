@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:movie_app/core/constants/api_constants.dart';
+import 'package:movie_app/features/movies/data/models/movie_details_model.dart';
 import 'package:movie_app/features/movies/data/models/movies_response_model.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -12,5 +13,10 @@ abstract class MovieApiService {
   @GET('/movie/popular')
   Future<MoviesResponseModel> getPopularMovies(
     @Query('page') int page,
+  );
+
+  @GET('/movie/{id}')
+  Future<MovieDetailsModel> getMovieDetailsById(
+    @Path('id') int id,
   );
 }
