@@ -24,4 +24,10 @@ class MovieRepositoryImpl implements MovieRepository{
     return model.toDomain();
   }
   
+  @override
+  Future<List<Movie>> getSimilarMovies(int id) async {
+    final models = await _datasource.getSimilarMovies(id: id);
+    return models.map((model) => model.toDomain()).toList();
+  }
+  
 }

@@ -25,6 +25,8 @@ import 'package:movie_app/features/movies/domain/usecases/get_movie_details_usec
     as _i864;
 import 'package:movie_app/features/movies/domain/usecases/get_popular_movies_usecase.dart'
     as _i671;
+import 'package:movie_app/features/movies/domain/usecases/get_similar_movies_usecase.dart'
+    as _i90;
 import 'package:movie_app/features/movies/presentation/bloc/movie_details_bloc/movie_details_bloc.dart'
     as _i741;
 import 'package:movie_app/features/movies/presentation/bloc/popular_movies_preview/popular_movies_preview_bloc.dart'
@@ -56,6 +58,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i671.GetPopularMoviesUseCase>(
       () => _i671.GetPopularMoviesUseCase(gh<_i512.MovieRepository>()),
     );
+    gh.factory<_i90.GetSimilarMoviesUsecase>(
+      () => _i90.GetSimilarMoviesUsecase(gh<_i512.MovieRepository>()),
+    );
     gh.factory<_i1028.PopularMoviesPreviewBloc>(
       () =>
           _i1028.PopularMoviesPreviewBloc(gh<_i671.GetPopularMoviesUseCase>()),
@@ -64,7 +69,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i128.PopularMoviesScreenBloc(gh<_i671.GetPopularMoviesUseCase>()),
     );
     gh.factory<_i741.MovieDetailsBloc>(
-      () => _i741.MovieDetailsBloc(gh<_i864.GetMovieDetailsUseCase>()),
+      () => _i741.MovieDetailsBloc(
+        gh<_i864.GetMovieDetailsUseCase>(),
+        gh<_i90.GetSimilarMoviesUsecase>(),
+      ),
     );
     return this;
   }

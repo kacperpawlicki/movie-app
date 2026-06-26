@@ -19,4 +19,10 @@ abstract class MovieApiService {
   Future<MovieDetailsModel> getMovieDetailsById(
     @Path('id') int id,
   );
+
+  @GET('/movie/{id}/similar')
+  Future<MoviesResponseModel> getSimilarMovies(
+    @Path('id') int id,
+    @Query('page') int page,
+  );
 }

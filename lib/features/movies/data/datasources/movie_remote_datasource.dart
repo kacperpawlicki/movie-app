@@ -18,4 +18,9 @@ class MovieRemoteDatasource {
     final response = await _apiService.getMovieDetailsById(id);
     return response;
   }
+
+  Future<List<MovieModel>> getSimilarMovies({required int id, int page = 1}) async {
+    final response = await _apiService.getSimilarMovies(id, page);
+    return response.results;
+  }
 }

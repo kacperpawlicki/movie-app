@@ -382,11 +382,11 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loading,TResult Function( MovieDetails details)?  loaded,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loading,TResult Function( MovieDetails details,  List<Movie> similarMovies)?  loaded,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Loading() when loading != null:
 return loading();case _Loaded() when loaded != null:
-return loaded(_that.details);case _Error() when error != null:
+return loaded(_that.details,_that.similarMovies);case _Error() when error != null:
 return error(_that.message);case _:
   return orElse();
 
@@ -405,11 +405,11 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loading,required TResult Function( MovieDetails details)  loaded,required TResult Function( String message)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loading,required TResult Function( MovieDetails details,  List<Movie> similarMovies)  loaded,required TResult Function( String message)  error,}) {final _that = this;
 switch (_that) {
 case _Loading():
 return loading();case _Loaded():
-return loaded(_that.details);case _Error():
+return loaded(_that.details,_that.similarMovies);case _Error():
 return error(_that.message);case _:
   throw StateError('Unexpected subclass');
 
@@ -427,11 +427,11 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loading,TResult? Function( MovieDetails details)?  loaded,TResult? Function( String message)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loading,TResult? Function( MovieDetails details,  List<Movie> similarMovies)?  loaded,TResult? Function( String message)?  error,}) {final _that = this;
 switch (_that) {
 case _Loading() when loading != null:
 return loading();case _Loaded() when loaded != null:
-return loaded(_that.details);case _Error() when error != null:
+return loaded(_that.details,_that.similarMovies);case _Error() when error != null:
 return error(_that.message);case _:
   return null;
 
@@ -476,10 +476,17 @@ String toString() {
 
 
 class _Loaded implements MovieDetailsState {
-  const _Loaded({required this.details});
+  const _Loaded({required this.details, required final  List<Movie> similarMovies}): _similarMovies = similarMovies;
   
 
  final  MovieDetails details;
+ final  List<Movie> _similarMovies;
+ List<Movie> get similarMovies {
+  if (_similarMovies is EqualUnmodifiableListView) return _similarMovies;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_similarMovies);
+}
+
 
 /// Create a copy of MovieDetailsState
 /// with the given fields replaced by the non-null parameter values.
@@ -491,16 +498,16 @@ _$LoadedCopyWith<_Loaded> get copyWith => __$LoadedCopyWithImpl<_Loaded>(this, _
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Loaded&&(identical(other.details, details) || other.details == details));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Loaded&&(identical(other.details, details) || other.details == details)&&const DeepCollectionEquality().equals(other._similarMovies, _similarMovies));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,details);
+int get hashCode => Object.hash(runtimeType,details,const DeepCollectionEquality().hash(_similarMovies));
 
 @override
 String toString() {
-  return 'MovieDetailsState.loaded(details: $details)';
+  return 'MovieDetailsState.loaded(details: $details, similarMovies: $similarMovies)';
 }
 
 
@@ -511,7 +518,7 @@ abstract mixin class _$LoadedCopyWith<$Res> implements $MovieDetailsStateCopyWit
   factory _$LoadedCopyWith(_Loaded value, $Res Function(_Loaded) _then) = __$LoadedCopyWithImpl;
 @useResult
 $Res call({
- MovieDetails details
+ MovieDetails details, List<Movie> similarMovies
 });
 
 
@@ -528,10 +535,11 @@ class __$LoadedCopyWithImpl<$Res>
 
 /// Create a copy of MovieDetailsState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? details = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? details = null,Object? similarMovies = null,}) {
   return _then(_Loaded(
 details: null == details ? _self.details : details // ignore: cast_nullable_to_non_nullable
-as MovieDetails,
+as MovieDetails,similarMovies: null == similarMovies ? _self._similarMovies : similarMovies // ignore: cast_nullable_to_non_nullable
+as List<Movie>,
   ));
 }
 
