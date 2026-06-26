@@ -14,14 +14,11 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
 
   MovieDetailsBloc(this._getMovieDetailsUseCase) : super(_Loading()) {
     on<_Started>((event, emit) async {
-      print('EVENT STARTED z id: ${event.id}');
       emit(MovieDetailsState.loading());
       try {
         final details = await _getMovieDetailsUseCase(event.id);
-        print('Pobrano: ${details.title}');
         emit(MovieDetailsState.loaded(details: details));
       } catch (e) {
-        print('BŁĄD: $e');
         emit(MovieDetailsState.error(e.toString()));
       }
     });

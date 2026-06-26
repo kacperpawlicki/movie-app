@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:movie_app/core/injection/injection.dart';
 import 'package:movie_app/core/widgets/media_card.dart';
 import 'package:movie_app/features/movies/presentation/bloc/popular_movies_screen/popular_movies_screen_bloc.dart';
@@ -87,7 +88,9 @@ class _PopularMoviesScreenViewState extends State<_PopularMoviesScreenView> {
                               title: movies[index].title,
                               voteAverage: movies[index].voteAverage,
                               imagePath: movies[index].posterPath,
-                              onTap: () {},
+                              onTap: () {
+                                context.push('/movies/details/${movies[index].id}');
+                              },
                             ),
                             childCount: movies.length,
                           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:movie_app/core/injection/injection.dart';
 import 'package:movie_app/features/movies/domain/entities/movie_details.dart';
 import 'package:movie_app/features/movies/presentation/bloc/movie_details_bloc/movie_details_bloc.dart';
@@ -9,19 +10,132 @@ class MovieDetailsScreen extends StatelessWidget {
 
   const MovieDetailsScreen({super.key, required this.id});
 
+  final String genericPath = 'https://image.tmdb.org/t/p/w500';
+
+  String _formatDuration(int minutes) {
+    final hours = minutes ~/ 60;
+    final remainingMinutes = minutes % 60;
+
+    if (hours == 0) {
+      return '$remainingMinutes min';
+    }
+
+    if (remainingMinutes == 0) {
+      return '$hours h';
+    }
+
+    return '$hours h $remainingMinutes min';
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
           getIt<MovieDetailsBloc>()..add(MovieDetailsEvent.started(id)),
       child: Scaffold(
-        appBar: AppBar(title: const Text('Movie Details')),
         body: BlocBuilder<MovieDetailsBloc, MovieDetailsState>(
           builder: (context, state) {
             return state.when(
               loading: () => Center(child: CircularProgressIndicator()),
-              loaded: (MovieDetails details) =>
-                  Center(child: Text(details.title)),
+              loaded: (MovieDetails details) => Column(
+                spacing: 4,
+                children: [
+                  Stack(
+                    children: [
+                      Image.network('$genericPath${details.backdropPath}'),
+                      Positioned(
+                        left: 15,
+                        top: 30,
+                        child: CircleAvatar(
+                          backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+                          child: IconButton(
+                            onPressed: () {
+                              context.pop();
+                            },
+                            icon: Icon(Icons.arrow_back, color: Colors.white),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        right: 15,
+                        top: 30,
+                        child: CircleAvatar(
+                          backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+                          child: IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.favorite_border,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                      top: 10,
+                    ),
+                    child: Column(
+                      spacing: 2,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          details.title.toUpperCase(),
+                          style: TextStyle(
+                            fontSize: 35,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        Row(
+                          spacing: 4,
+                          children: [
+                            Icon(Icons.star, color: Colors.amber, size: 20),
+                            Text(
+                              details.voteAverage.toStringAsFixed(1),
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              '(${details.voteCount})',
+                              style: TextStyle(fontSize: 12),
+                            ),
+                            SizedBox(width: 4),
+                            Text('●', style: TextStyle(fontSize: 13)),
+                            SizedBox(width: 4),
+                            Text(
+                              _formatDuration(details.runtime),
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          spacing: 8,
+                          children: details.genres
+                              .take(3)
+                              .map(
+                                (item) => Chip(
+                                  label: Text(item.name),
+                                  backgroundColor: Theme.of(
+                                    context,
+                                  ).colorScheme.secondaryContainer,
+                                  shape: const StadiumBorder(),
+                                  padding: EdgeInsets.all(0),
+                                  side: const BorderSide(
+                                    color: Colors.white,
+                                    width: 0.3,
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                        ),
+                        Text(details.overview),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
               error: (String message) => Text(message),
             );
           },

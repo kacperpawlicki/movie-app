@@ -21,7 +21,7 @@ class AppTheme {
 
       secondary: Color.fromARGB(255, 226, 132, 132),
       onSecondary: Colors.white,
-      secondaryContainer: Color(0xFF262626),
+      secondaryContainer: Color.fromARGB(255, 48, 48, 48),
       onSecondaryContainer: Color(0xFFBDBDBD),
 
       surface: Color.fromARGB(255, 40, 40, 40),
