@@ -33,6 +33,18 @@ import 'package:movie_app/features/movies/presentation/bloc/popular_movies_previ
     as _i1028;
 import 'package:movie_app/features/movies/presentation/bloc/popular_movies_screen/popular_movies_screen_bloc.dart'
     as _i128;
+import 'package:movie_app/features/tv_series/data/datasources/tv_series_api_service.dart'
+    as _i979;
+import 'package:movie_app/features/tv_series/data/datasources/tv_series_remote_datasource.dart'
+    as _i934;
+import 'package:movie_app/features/tv_series/data/repositories/tv_series_repository_impl.dart'
+    as _i156;
+import 'package:movie_app/features/tv_series/domain/repositories/tv_series_repository.dart'
+    as _i632;
+import 'package:movie_app/features/tv_series/domain/usecases/get_popular_tv_series_usecase.dart'
+    as _i104;
+import 'package:movie_app/features/tv_series/presentation/bloc/popular_tv_series_preview/popular_tv_series_preview_bloc.dart'
+    as _i856;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -45,6 +57,15 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i361.Dio>(() => dioModule.dio);
     gh.singleton<_i756.MovieApiService>(
       () => dioModule.movieApiService(gh<_i361.Dio>()),
+    );
+    gh.singleton<_i979.TvSeriesApiService>(
+      () => dioModule.tvSeriesApiService(gh<_i361.Dio>()),
+    );
+    gh.singleton<_i934.TvSeriesRemoteDatasource>(
+      () => _i934.TvSeriesRemoteDatasource(gh<_i979.TvSeriesApiService>()),
+    );
+    gh.singleton<_i632.TvSeriesRepository>(
+      () => _i156.TvSeriesRepositoryImpl(gh<_i934.TvSeriesRemoteDatasource>()),
     );
     gh.singleton<_i40.MovieRemoteDatasource>(
       () => _i40.MovieRemoteDatasource(gh<_i756.MovieApiService>()),
@@ -60,6 +81,14 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i90.GetSimilarMoviesUsecase>(
       () => _i90.GetSimilarMoviesUsecase(gh<_i512.MovieRepository>()),
+    );
+    gh.factory<_i104.GetPopularTvSeriesUseCase>(
+      () => _i104.GetPopularTvSeriesUseCase(gh<_i632.TvSeriesRepository>()),
+    );
+    gh.factory<_i856.PopularTvSeriesPreviewBloc>(
+      () => _i856.PopularTvSeriesPreviewBloc(
+        gh<_i104.GetPopularTvSeriesUseCase>(),
+      ),
     );
     gh.factory<_i1028.PopularMoviesPreviewBloc>(
       () =>
