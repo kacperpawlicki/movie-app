@@ -65,7 +65,7 @@ class MovieDetailsScreen extends StatelessWidget {
                         ),
                         actions: [
                           Padding(
-                            padding: const EdgeInsets.only(right: 30),
+                            padding: const EdgeInsets.only(right: 25),
                             child: CircleAvatar(
                               backgroundColor: Theme.of(
                                 context,
@@ -155,41 +155,8 @@ class MovieDetailsScreen extends StatelessWidget {
                                     .toList(),
                               ),
                               Text(details.overview),
-                              SizedBox(height: 30),
-                              Text(
-                                'Similar Movies',
-                                style: TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 220,
-                                child: ListView.separated(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: similarMovies.length,
-                                  itemBuilder: (context, index) {
-                                    return SizedBox(
-                                      width: 130,
-                                      child: MediaCard(
-                                        title: similarMovies[index].title,
-                                        voteAverage:
-                                            similarMovies[index].voteAverage,
-                                        imagePath:
-                                            similarMovies[index].posterPath,
-                                        onTap: () {
-                                          context.push(
-                                            '/movies/details/${similarMovies[index].id}',
-                                          );
-                                        },
-                                      ),
-                                    );
-                                  },
-                                  separatorBuilder: (context, index) {
-                                    return const SizedBox(width: 12);
-                                  },
-                                ),
-                              ),
+
+                              if(similarMovies.isNotEmpty) _similarMoviesSection(similarMovies)
                             ],
                           ),
                         ),
@@ -203,4 +170,40 @@ class MovieDetailsScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget _similarMoviesSection(List<Movie> similarMovies) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      SizedBox(height: 30),
+      Text(
+        'Similar Movies',
+        style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+      ),
+      SizedBox(
+        height: 220,
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          itemCount: similarMovies.length,
+          itemBuilder: (context, index) {
+            return SizedBox(
+              width: 130,
+              child: MediaCard(
+                title: similarMovies[index].title,
+                voteAverage: similarMovies[index].voteAverage,
+                imagePath: similarMovies[index].posterPath,
+                onTap: () {
+                  context.push('/movies/details/${similarMovies[index].id}');
+                },
+              ),
+            );
+          },
+          separatorBuilder: (context, index) {
+            return const SizedBox(width: 12);
+          },
+        ),
+      ),
+    ],
+  );
 }
