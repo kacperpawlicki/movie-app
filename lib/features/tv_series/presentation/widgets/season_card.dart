@@ -15,11 +15,19 @@ class SeasonCard extends StatelessWidget {
       color: Theme.of(context).colorScheme.primaryContainer,
       child: Row(
         children: [
-          Image.network(
-            '$genericPath${season.posterPath}',
-            fit: BoxFit.cover,
-            height: 150,
-          ),
+          season.posterPath != null
+              ? Image.network(
+                  '$genericPath${season.posterPath}',
+                  fit: BoxFit.cover,
+                  height: 150,
+                  width: 100,
+                )
+              : Container(
+                  height: 150,
+                  width: 100,
+                  color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                  child: const Icon(Icons.tv, size: 40),
+                ),
           Expanded(
             child: Padding(
               padding: EdgeInsetsGeometry.all(10),
@@ -32,11 +40,11 @@ class SeasonCard extends StatelessWidget {
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    '${season.episodeCount} Episodes  ●  ${season.voteAverage} Rating',
+                    '${season.episodeCount} Episodes',
                     style: TextStyle(
                       fontSize: 13,
-                      color: Theme.of(context).colorScheme.primary,
-                      fontWeight: FontWeight.bold
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(

@@ -74,7 +74,7 @@ class MovieDetailsScreen extends StatelessWidget {
                         ),
                         actions: [
                           Padding(
-                            padding: const EdgeInsets.only(right: 25),
+                            padding: const EdgeInsets.only(right: 15),
                             child: CircleAvatar(
                               backgroundColor: Theme.of(
                                 context,
@@ -100,7 +100,7 @@ class MovieDetailsScreen extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.only(
                             left: 20,
-                            right: 30,
+                            right: 20,
                             top: 10,
                           ),
                           child: Column(
@@ -114,78 +114,76 @@ class MovieDetailsScreen extends StatelessWidget {
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),
-                              Row(
-                                spacing: 15,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    spacing: 4,
-                                    children: [
-                                      Icon(
-                                        Icons.star,
-                                        color: Colors.amber,
-                                        size: 20,
-                                      ),
-                                      Text(
-                                        details.voteAverage.toStringAsFixed(1),
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  spacing: 15,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      spacing: 4,
+                                      children: [
+                                        Icon(
+                                          Icons.star,
+                                          color: Colors.amber,
+                                          size: 20,
                                         ),
-                                      ),
-                                      Text(
-                                        '(${_formatVoteCount(details.voteCount)})',
-                                        style: TextStyle(fontSize: 12),
-                                      ),
-                                    ],
-                                  ),
-                                  Text('●', style: TextStyle(fontSize: 13)),
-                                  Text(
-                                    _formatDuration(details.runtime),
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
+                                        Text(
+                                          details.voteAverage.toStringAsFixed(1),
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Text(
+                                          '(${_formatVoteCount(details.voteCount)})',
+                                          style: TextStyle(fontSize: 12),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                  Text('●', style: TextStyle(fontSize: 13)),
-                                  Expanded(
-                                    child: SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        spacing: 4,
-                                        children: details.genres
-                                            .take(3)
-                                            .map(
-                                              (item) => Container(
-                                                padding: const EdgeInsets.symmetric(
-                                                  horizontal: 10,
-                                                  vertical: 4,
-                                                ),
-                                                decoration: BoxDecoration(
-                                                  color: Theme.of(
-                                                    context,
-                                                  ).colorScheme.secondaryContainer,
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
-                                                ),
-                                                child: Text(
-                                                  item.name.toUpperCase(),
-                                                  style: TextStyle(
-                                                    fontSize: 11,
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.w500,
-                                                    letterSpacing: 0.5,
-                                                  ),
+                                    Text('●', style: TextStyle(fontSize: 13)),
+                                    Text(
+                                      _formatDuration(details.runtime),
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text('●', style: TextStyle(fontSize: 13)),
+                                    Row(
+                                      spacing: 4,
+                                      children: details.genres
+                                          .take(3)
+                                          .map(
+                                            (item) => Container(
+                                              padding: const EdgeInsets.symmetric(
+                                                horizontal: 10,
+                                                vertical: 4,
+                                              ),
+                                              decoration: BoxDecoration(
+                                                color: Theme.of(
+                                                  context,
+                                                ).colorScheme.secondaryContainer,
+                                                borderRadius:
+                                                    BorderRadius.circular(6),
+                                              ),
+                                              child: Text(
+                                                item.name.toUpperCase(),
+                                                style: TextStyle(
+                                                  fontSize: 11,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w500,
+                                                  letterSpacing: 0.5,
                                                 ),
                                               ),
-                                            )
-                                            .toList(),
-                                      ),
+                                            ),
+                                          )
+                                          .toList(),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
 
-                              SizedBox(height: 20,),
+                              SizedBox(height: 20),
 
                               Text(details.overview),
 
