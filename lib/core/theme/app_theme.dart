@@ -16,12 +16,12 @@ class AppTheme {
 
       primary: Color.fromARGB(255, 241, 43, 53),
       onPrimary: Colors.white,
-      primaryContainer: Color(0xFF99060D),
+      primaryContainer: Color.fromARGB(255, 50, 50, 50),
       onPrimaryContainer: Colors.white,
 
       secondary: Color.fromARGB(255, 226, 132, 132),
       onSecondary: Colors.white,
-      secondaryContainer: Color.fromARGB(255, 48, 48, 48),
+      secondaryContainer: Color.fromARGB(255, 63, 63, 63),
       onSecondaryContainer: Color(0xFFBDBDBD),
 
       surface: Color.fromARGB(255, 40, 40, 40),

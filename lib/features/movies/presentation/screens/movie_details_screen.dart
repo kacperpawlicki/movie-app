@@ -29,6 +29,15 @@ class MovieDetailsScreen extends StatelessWidget {
     return '$hours h $remainingMinutes min';
   }
 
+  String _formatVoteCount(int count) {
+    if (count >= 1000000) {
+      return '${(count / 1000000).toStringAsFixed(1)}M';
+    } else if (count >= 10000) {
+      return '${(count / 1000).toStringAsFixed(1)}k';
+    }
+    return count.toString();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -91,7 +100,7 @@ class MovieDetailsScreen extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.only(
                             left: 20,
-                            right: 20,
+                            right: 30,
                             top: 10,
                           ),
                           child: Column(
@@ -106,57 +115,82 @@ class MovieDetailsScreen extends StatelessWidget {
                                 ),
                               ),
                               Row(
-                                spacing: 4,
+                                spacing: 15,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Icon(
-                                    Icons.star,
-                                    color: Colors.amber,
-                                    size: 20,
+                                  Row(
+                                    spacing: 4,
+                                    children: [
+                                      Icon(
+                                        Icons.star,
+                                        color: Colors.amber,
+                                        size: 20,
+                                      ),
+                                      Text(
+                                        details.voteAverage.toStringAsFixed(1),
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Text(
+                                        '(${_formatVoteCount(details.voteCount)})',
+                                        style: TextStyle(fontSize: 12),
+                                      ),
+                                    ],
                                   ),
-                                  Text(
-                                    details.voteAverage.toStringAsFixed(1),
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    '(${details.voteCount})',
-                                    style: TextStyle(fontSize: 12),
-                                  ),
-                                  SizedBox(width: 4),
                                   Text('●', style: TextStyle(fontSize: 13)),
-                                  SizedBox(width: 4),
                                   Text(
                                     _formatDuration(details.runtime),
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
+                                  Text('●', style: TextStyle(fontSize: 13)),
+                                  Expanded(
+                                    child: SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        spacing: 4,
+                                        children: details.genres
+                                            .take(3)
+                                            .map(
+                                              (item) => Container(
+                                                padding: const EdgeInsets.symmetric(
+                                                  horizontal: 10,
+                                                  vertical: 4,
+                                                ),
+                                                decoration: BoxDecoration(
+                                                  color: Theme.of(
+                                                    context,
+                                                  ).colorScheme.secondaryContainer,
+                                                  borderRadius:
+                                                      BorderRadius.circular(6),
+                                                ),
+                                                child: Text(
+                                                  item.name.toUpperCase(),
+                                                  style: TextStyle(
+                                                    fontSize: 11,
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.w500,
+                                                    letterSpacing: 0.5,
+                                                  ),
+                                                ),
+                                              ),
+                                            )
+                                            .toList(),
+                                      ),
+                                    ),
+                                  ),
                                 ],
                               ),
-                              Row(
-                                spacing: 8,
-                                children: details.genres
-                                    .take(3)
-                                    .map(
-                                      (item) => Chip(
-                                        label: Text(item.name),
-                                        backgroundColor: Theme.of(
-                                          context,
-                                        ).colorScheme.secondaryContainer,
-                                        shape: const StadiumBorder(),
-                                        padding: EdgeInsets.all(0),
-                                        side: const BorderSide(
-                                          color: Colors.white,
-                                          width: 0.3,
-                                        ),
-                                      ),
-                                    )
-                                    .toList(),
-                              ),
+
+                              SizedBox(height: 20,),
+
                               Text(details.overview),
 
-                              if(similarMovies.isNotEmpty) _similarMoviesSection(similarMovies)
+                              if (similarMovies.isNotEmpty)
+                                _similarMoviesSection(similarMovies),
                             ],
                           ),
                         ),
