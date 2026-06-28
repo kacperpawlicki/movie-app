@@ -64,7 +64,7 @@ class PopularTvSeriesPreview extends StatelessWidget {
                               voteAverage: tvSeries[index].voteAverage,
                               imagePath: tvSeries[index].backdropPath,
                               onTap: () {
-                                
+                                context.push('tv/details/${tvSeries[index].id}');
                               },
                               orientation: Axis.horizontal,
                             ),

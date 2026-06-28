@@ -43,10 +43,14 @@ import 'package:movie_app/features/tv_series/domain/repositories/tv_series_repos
     as _i632;
 import 'package:movie_app/features/tv_series/domain/usecases/get_popular_tv_series_usecase.dart'
     as _i104;
+import 'package:movie_app/features/tv_series/domain/usecases/get_tv_series_details_usecase.dart'
+    as _i933;
 import 'package:movie_app/features/tv_series/presentation/bloc/popular_tv_series_preview/popular_tv_series_preview_bloc.dart'
     as _i856;
 import 'package:movie_app/features/tv_series/presentation/bloc/popular_tv_series_screen/popular_tv_series_screen_bloc.dart'
     as _i75;
+import 'package:movie_app/features/tv_series/presentation/bloc/tv_series_details/tv_series_details_bloc.dart'
+    as _i8;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -87,6 +91,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i104.GetPopularTvSeriesUseCase>(
       () => _i104.GetPopularTvSeriesUseCase(gh<_i632.TvSeriesRepository>()),
     );
+    gh.factory<_i933.GetTvSeriesDetailsUsecase>(
+      () => _i933.GetTvSeriesDetailsUsecase(gh<_i632.TvSeriesRepository>()),
+    );
     gh.factory<_i856.PopularTvSeriesPreviewBloc>(
       () => _i856.PopularTvSeriesPreviewBloc(
         gh<_i104.GetPopularTvSeriesUseCase>(),
@@ -108,6 +115,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i864.GetMovieDetailsUseCase>(),
         gh<_i90.GetSimilarMoviesUsecase>(),
       ),
+    );
+    gh.factory<_i8.TvSeriesDetailsBloc>(
+      () => _i8.TvSeriesDetailsBloc(gh<_i933.GetTvSeriesDetailsUsecase>()),
     );
     return this;
   }

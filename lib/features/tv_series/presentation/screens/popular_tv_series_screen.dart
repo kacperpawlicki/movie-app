@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:movie_app/core/injection/injection.dart';
 import 'package:movie_app/core/widgets/media_card.dart';
 import 'package:movie_app/features/tv_series/presentation/bloc/popular_tv_series_screen/popular_tv_series_screen_bloc.dart';
@@ -89,7 +90,7 @@ class _PopularTvSeriesScreenViewState
                               voteAverage: tvSeries[index].voteAverage,
                               imagePath: tvSeries[index].posterPath,
                               onTap: () {
-                                
+                                context.push('tv/details/${tvSeries[index].id}');
                               },
                             ),
                             childCount: tvSeries.length,
