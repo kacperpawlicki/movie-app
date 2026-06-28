@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:movie_app/core/injection/injection.dart';
 import 'package:movie_app/core/widgets/media_card.dart';
 import 'package:movie_app/features/tv_series/domain/entities/tv_series.dart';
@@ -36,7 +37,7 @@ class PopularTvSeriesPreview extends StatelessWidget {
                         ),
                         TextButton(
                           onPressed: () {
-                            
+                            context.push('/tvSeries/popular');
                           },
                           child: Text(
                             'SEE MORE',
