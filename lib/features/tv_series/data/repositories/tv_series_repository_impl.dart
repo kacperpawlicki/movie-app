@@ -23,4 +23,10 @@ class TvSeriesRepositoryImpl implements TvSeriesRepository{
     final model = await _datasource.getTvSeriesDetails(id: id);
     return model.map((model) => model.toDomain());
   }
+  
+  @override
+  Future<List<TvSeries>> getSimilarTvSeries(int id) async {
+    final models = await _datasource.getSimilarTvSeries(id: id);
+    return models.map((model) => model.toDomain()).toList();
+  }
 }

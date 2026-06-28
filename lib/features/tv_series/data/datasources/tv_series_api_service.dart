@@ -19,4 +19,10 @@ abstract class TvSeriesApiService {
   Future<TvSeriesDetailsModel> getTvSeriesDetails(
     @Path('id') int id,
   );
+
+  @GET('/tv/{id}/similar')
+  Future<TvSeriesResponseModel> getSimilarTvSeries(
+    @Path('id') int id,
+    @Query('page') int page,
+  );
 }

@@ -44,160 +44,164 @@ class MovieDetailsScreen extends StatelessWidget {
       create: (context) =>
           getIt<MovieDetailsBloc>()..add(MovieDetailsEvent.started(id)),
       child: Scaffold(
-        body: BlocBuilder<MovieDetailsBloc, MovieDetailsState>(
-          builder: (context, state) {
-            return state.when(
-              loading: () => Center(child: CircularProgressIndicator()),
-              loaded: (MovieDetails details, List<Movie> similarMovies) =>
-                  CustomScrollView(
-                    slivers: [
-                      SliverAppBar(
-                        expandedHeight: 220,
-                        pinned: true,
-                        automaticallyImplyLeading: false,
-                        toolbarHeight: 50,
-                        leadingWidth: 55,
-                        leading: Padding(
-                          padding: const EdgeInsets.only(left: 15),
-                          child: CircleAvatar(
-                            backgroundColor: Theme.of(
-                              context,
-                            ).colorScheme.secondaryContainer,
-                            child: IconButton(
-                              onPressed: () => context.pop(),
-                              icon: const Icon(
-                                Icons.arrow_back,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                        actions: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 15),
+        body: SafeArea(
+          top: false,
+          child: BlocBuilder<MovieDetailsBloc, MovieDetailsState>(
+            builder: (context, state) {
+              return state.when(
+                loading: () => Center(child: CircularProgressIndicator()),
+                loaded: (MovieDetails details, List<Movie> similarMovies) =>
+                    CustomScrollView(
+                      slivers: [
+                        SliverAppBar(
+                          expandedHeight: 220,
+                          pinned: true,
+                          automaticallyImplyLeading: false,
+                          toolbarHeight: 50,
+                          leadingWidth: 55,
+                          scrolledUnderElevation: 0,
+                          leading: Padding(
+                            padding: const EdgeInsets.only(left: 15),
                             child: CircleAvatar(
                               backgroundColor: Theme.of(
                                 context,
                               ).colorScheme.secondaryContainer,
                               child: IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.favorite_border,
-                                  color: Theme.of(context).colorScheme.primary,
+                                onPressed: () => context.pop(),
+                                icon: const Icon(
+                                  Icons.arrow_back,
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
                           ),
-                        ],
-                        flexibleSpace: FlexibleSpaceBar(
-                          background: Image.network(
-                            '$genericPath${details.backdropPath}',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                      SliverToBoxAdapter(
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            left: 20,
-                            right: 20,
-                            top: 10,
-                          ),
-                          child: Column(
-                            spacing: 2,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                details.title.toUpperCase(),
-                                style: TextStyle(
-                                  fontSize: 35,
-                                  fontWeight: FontWeight.w700,
+                          actions: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 15),
+                              child: CircleAvatar(
+                                backgroundColor: Theme.of(
+                                  context,
+                                ).colorScheme.secondaryContainer,
+                                child: IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.favorite_border,
+                                    color: Theme.of(context).colorScheme.primary,
+                                  ),
                                 ),
                               ),
-                              SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  spacing: 15,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      spacing: 4,
-                                      children: [
-                                        Icon(
-                                          Icons.star,
-                                          color: Colors.amber,
-                                          size: 20,
-                                        ),
-                                        Text(
-                                          details.voteAverage.toStringAsFixed(1),
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
+                            ),
+                          ],
+                          flexibleSpace: FlexibleSpaceBar(
+                            background: Image.network(
+                              '$genericPath${details.backdropPath}',
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        SliverToBoxAdapter(
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              left: 20,
+                              right: 20,
+                              top: 10,
+                            ),
+                            child: Column(
+                              spacing: 2,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  details.title.toUpperCase(),
+                                  style: TextStyle(
+                                    fontSize: 35,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    spacing: 15,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        spacing: 4,
+                                        children: [
+                                          Icon(
+                                            Icons.star,
+                                            color: Colors.amber,
+                                            size: 20,
                                           ),
-                                        ),
-                                        Text(
-                                          '(${_formatVoteCount(details.voteCount)})',
-                                          style: TextStyle(fontSize: 12),
-                                        ),
-                                      ],
-                                    ),
-                                    Text('●', style: TextStyle(fontSize: 13)),
-                                    Text(
-                                      _formatDuration(details.runtime),
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
+                                          Text(
+                                            details.voteAverage.toStringAsFixed(1),
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          Text(
+                                            '(${_formatVoteCount(details.voteCount)})',
+                                            style: TextStyle(fontSize: 12),
+                                          ),
+                                        ],
                                       ),
-                                    ),
-                                    Text('●', style: TextStyle(fontSize: 13)),
-                                    Row(
-                                      spacing: 4,
-                                      children: details.genres
-                                          .take(3)
-                                          .map(
-                                            (item) => Container(
-                                              padding: const EdgeInsets.symmetric(
-                                                horizontal: 10,
-                                                vertical: 4,
-                                              ),
-                                              decoration: BoxDecoration(
-                                                color: Theme.of(
-                                                  context,
-                                                ).colorScheme.secondaryContainer,
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
-                                              ),
-                                              child: Text(
-                                                item.name.toUpperCase(),
-                                                style: TextStyle(
-                                                  fontSize: 11,
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.w500,
-                                                  letterSpacing: 0.5,
+                                      Text('●', style: TextStyle(fontSize: 13)),
+                                      Text(
+                                        _formatDuration(details.runtime),
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Text('●', style: TextStyle(fontSize: 13)),
+                                      Row(
+                                        spacing: 4,
+                                        children: details.genres
+                                            .take(3)
+                                            .map(
+                                              (item) => Container(
+                                                padding: const EdgeInsets.symmetric(
+                                                  horizontal: 10,
+                                                  vertical: 4,
+                                                ),
+                                                decoration: BoxDecoration(
+                                                  color: Theme.of(
+                                                    context,
+                                                  ).colorScheme.secondaryContainer,
+                                                  borderRadius:
+                                                      BorderRadius.circular(6),
+                                                ),
+                                                child: Text(
+                                                  item.name.toUpperCase(),
+                                                  style: TextStyle(
+                                                    fontSize: 11,
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.w500,
+                                                    letterSpacing: 0.5,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          )
-                                          .toList(),
-                                    ),
-                                  ],
+                                            )
+                                            .toList(),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-
-                              SizedBox(height: 20),
-
-                              Text(details.overview),
-
-                              if (similarMovies.isNotEmpty)
-                                _similarMoviesSection(similarMovies),
-                            ],
+          
+                                SizedBox(height: 20),
+          
+                                Text(details.overview),
+          
+                                if (similarMovies.isNotEmpty)
+                                  _similarMoviesSection(similarMovies),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-              error: (String message) => Text(message),
-            );
-          },
+                      ],
+                    ),
+                error: (String message) => Text(message),
+              );
+            },
+          ),
         ),
       ),
     );
@@ -208,11 +212,12 @@ Widget _similarMoviesSection(List<Movie> similarMovies) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      SizedBox(height: 30),
+      SizedBox(height: 20),
       Text(
         'Similar Movies',
         style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
       ),
+      SizedBox(height: 10),
       SizedBox(
         height: 220,
         child: ListView.separated(

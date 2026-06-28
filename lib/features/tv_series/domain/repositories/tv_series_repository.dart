@@ -4,4 +4,5 @@ import 'package:movie_app/features/tv_series/domain/entities/tv_series_details.d
 abstract class TvSeriesRepository {
   Future<List<TvSeries>> getPopularTvSeries(int page);
   Future<TvSeriesDetails> getTvSeriesDetails(int id);
+  Future<List<TvSeries>> getSimilarTvSeries(int id);
 }

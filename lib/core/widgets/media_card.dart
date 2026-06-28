@@ -31,16 +31,26 @@ class MediaCard extends StatelessWidget {
             children: [
               Card(
                 clipBehavior: Clip.antiAlias,
-                child: Image.network(
-                    '$genericPath$imagePath',
-                    fit: BoxFit.cover,
-                ),
+                child: imagePath != null
+                    ? Image.network('$genericPath$imagePath', fit: BoxFit.cover)
+                    : AspectRatio(
+                        aspectRatio: 2 / 3, // proporcje plakatu filmowego
+                        child: Container(
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.surfaceContainerHighest,
+                          child: const Icon(Icons.tv, size: 40),
+                        ),
+                      ),
               ),
               Positioned(
                 left: 6,
                 bottom: 8,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 6,
+                    vertical: 3,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.black.withValues(alpha: 0.4),
                     borderRadius: BorderRadius.circular(999),

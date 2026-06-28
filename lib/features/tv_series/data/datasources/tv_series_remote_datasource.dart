@@ -17,4 +17,9 @@ class TvSeriesRemoteDatasource {
   Future<TvSeriesDetailsModel> getTvSeriesDetails({required int id}) async {
     return await _apiService.getTvSeriesDetails(id);
   }
+
+  Future<List<TvSeriesModel>> getSimilarTvSeries({required int id, int page = 1}) async {
+    final response = await _apiService.getSimilarTvSeries(id, page);
+    return response.results;
+  }
 }
