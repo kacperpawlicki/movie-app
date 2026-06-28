@@ -51,7 +51,7 @@ class PopularMoviesPreview extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 SizedBox(
-                  height: 280,
+                  height: 260,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     itemCount: movies.length,

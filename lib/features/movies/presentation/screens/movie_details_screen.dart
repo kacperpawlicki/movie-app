@@ -39,149 +39,163 @@ class MovieDetailsScreen extends StatelessWidget {
           builder: (context, state) {
             return state.when(
               loading: () => Center(child: CircularProgressIndicator()),
-              loaded: (MovieDetails details, List<Movie> similarMovies) => Column(
-                spacing: 4,
-                children: [
-                  Stack(
-                    children: [
-                      Image.network('$genericPath${details.backdropPath}'),
-                      Positioned(
-                        left: 15,
-                        top: 30,
-                        child: CircleAvatar(
-                          backgroundColor: Theme.of(
-                            context,
-                          ).colorScheme.secondaryContainer,
-                          child: IconButton(
-                            onPressed: () {
-                              context.pop();
-                            },
-                            icon: Icon(Icons.arrow_back, color: Colors.white),
+              loaded: (MovieDetails details, List<Movie> similarMovies) =>
+                  CustomScrollView(
+                    slivers: [
+                      SliverAppBar(
+                        expandedHeight: 220,
+                        pinned: true,
+                        automaticallyImplyLeading: false,
+                        toolbarHeight: 50,
+                        leadingWidth: 55,
+                        leading: Padding(
+                          padding: const EdgeInsets.only(left: 15),
+                          child: CircleAvatar(
+                            backgroundColor: Theme.of(
+                              context,
+                            ).colorScheme.secondaryContainer,
+                            child: IconButton(
+                              onPressed: () => context.pop(),
+                              icon: const Icon(
+                                Icons.arrow_back,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                        actions: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 30),
+                            child: CircleAvatar(
+                              backgroundColor: Theme.of(
+                                context,
+                              ).colorScheme.secondaryContainer,
+                              child: IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.favorite_border,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                        flexibleSpace: FlexibleSpaceBar(
+                          background: Image.network(
+                            '$genericPath${details.backdropPath}',
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
-                      Positioned(
-                        right: 15,
-                        top: 30,
-                        child: CircleAvatar(
-                          backgroundColor: Theme.of(
-                            context,
-                          ).colorScheme.secondaryContainer,
-                          child: IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.favorite_border,
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
+                      SliverToBoxAdapter(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            left: 20,
+                            right: 20,
+                            top: 10,
+                          ),
+                          child: Column(
+                            spacing: 2,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                details.title.toUpperCase(),
+                                style: TextStyle(
+                                  fontSize: 35,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                              Row(
+                                spacing: 4,
+                                children: [
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                    size: 20,
+                                  ),
+                                  Text(
+                                    details.voteAverage.toStringAsFixed(1),
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    '(${details.voteCount})',
+                                    style: TextStyle(fontSize: 12),
+                                  ),
+                                  SizedBox(width: 4),
+                                  Text('●', style: TextStyle(fontSize: 13)),
+                                  SizedBox(width: 4),
+                                  Text(
+                                    _formatDuration(details.runtime),
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                spacing: 8,
+                                children: details.genres
+                                    .take(3)
+                                    .map(
+                                      (item) => Chip(
+                                        label: Text(item.name),
+                                        backgroundColor: Theme.of(
+                                          context,
+                                        ).colorScheme.secondaryContainer,
+                                        shape: const StadiumBorder(),
+                                        padding: EdgeInsets.all(0),
+                                        side: const BorderSide(
+                                          color: Colors.white,
+                                          width: 0.3,
+                                        ),
+                                      ),
+                                    )
+                                    .toList(),
+                              ),
+                              Text(details.overview),
+                              SizedBox(height: 30),
+                              Text(
+                                'Similar Movies',
+                                style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 220,
+                                child: ListView.separated(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: similarMovies.length,
+                                  itemBuilder: (context, index) {
+                                    return SizedBox(
+                                      width: 130,
+                                      child: MediaCard(
+                                        title: similarMovies[index].title,
+                                        voteAverage:
+                                            similarMovies[index].voteAverage,
+                                        imagePath:
+                                            similarMovies[index].posterPath,
+                                        onTap: () {
+                                          context.push(
+                                            '/movies/details/${similarMovies[index].id}',
+                                          );
+                                        },
+                                      ),
+                                    );
+                                  },
+                                  separatorBuilder: (context, index) {
+                                    return const SizedBox(width: 12);
+                                  },
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
                     ],
                   ),
-                  
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          left: 20,
-                          right: 20,
-                          top: 10,
-                        ),
-                        child: Column(
-                          spacing: 2,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              details.title.toUpperCase(),
-                              style: TextStyle(
-                                fontSize: 35,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            Row(
-                              spacing: 4,
-                              children: [
-                                Icon(Icons.star, color: Colors.amber, size: 20),
-                                Text(
-                                  details.voteAverage.toStringAsFixed(1),
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  '(${details.voteCount})',
-                                  style: TextStyle(fontSize: 12),
-                                ),
-                                SizedBox(width: 4),
-                                Text('●', style: TextStyle(fontSize: 13)),
-                                SizedBox(width: 4),
-                                Text(
-                                  _formatDuration(details.runtime),
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              spacing: 8,
-                              children: details.genres
-                                  .take(3)
-                                  .map(
-                                    (item) => Chip(
-                                      label: Text(item.name),
-                                      backgroundColor: Theme.of(
-                                        context,
-                                      ).colorScheme.secondaryContainer,
-                                      shape: const StadiumBorder(),
-                                      padding: EdgeInsets.all(0),
-                                      side: const BorderSide(
-                                        color: Colors.white,
-                                        width: 0.3,
-                                      ),
-                                    ),
-                                  )
-                                  .toList(),
-                            ),
-                            Text(details.overview),
-                            SizedBox(height: 30),
-                            Text(
-                              'Similar Movies',
-                              style: TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 220,
-                              child: ListView.separated(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: similarMovies.length,
-                                itemBuilder: (context, index) {
-                                  return SizedBox(
-                                    width: 130,
-                                    child: MediaCard(
-                                      title: similarMovies[index].title,
-                                      voteAverage:
-                                          similarMovies[index].voteAverage,
-                                      imagePath:
-                                          similarMovies[index].posterPath,
-                                      onTap: () {
-                                        context.push(
-                                          '/movies/details/${similarMovies[index].id}',
-                                        );
-                                      },
-                                    ),
-                                  );
-                                },
-                                separatorBuilder: (context, index) {
-                                  return const SizedBox(width: 12);
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
               error: (String message) => Text(message),
             );
           },

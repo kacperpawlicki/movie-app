@@ -8,7 +8,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      spacing: 5,
+      spacing: 20,
       children: [PopularMoviesPreview(), PopularTvSeriesPreview()],
     );
   }
