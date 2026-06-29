@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:movie_app/features/tv_series/domain/entities/tv_series_details.dart';
 import 'package:movie_app/features/tv_series/presentation/widgets/season_card.dart';
 
@@ -10,7 +11,7 @@ class TvSeriesAllSeasonsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(details.name), scrolledUnderElevation: 0,),
+      appBar: AppBar(title: Text(details.name), scrolledUnderElevation: 0),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,11 +38,18 @@ class TvSeriesAllSeasonsScreen extends StatelessWidget {
             ),
             Expanded(
               child: ListView.separated(
-                separatorBuilder: (context, index) => const SizedBox(height: 5,),
+                separatorBuilder: (context, index) => const SizedBox(height: 5),
                 padding: const EdgeInsets.all(12),
                 itemCount: details.seasons.length,
-                itemBuilder: (context, index) =>
-                    SeasonCard(season: details.seasons[index]),
+                itemBuilder: (context, index) => SeasonCard(
+                  season: details.seasons[index],
+                  onTap: () {
+                    context.push(
+                      '/tv/${details.id}/seasons/${details.seasons[index].seasonNumber}',
+                      extra: details.name,
+                    );
+                  },
+                ),
               ),
             ),
           ],

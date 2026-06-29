@@ -3,6 +3,7 @@ import 'package:movie_app/features/movies/presentation/screens/movie_details_scr
 import 'package:movie_app/features/movies/presentation/screens/popular_movies_screen.dart';
 import 'package:movie_app/features/tv_series/domain/entities/tv_series_details.dart';
 import 'package:movie_app/features/tv_series/presentation/screens/popular_tv_series_screen.dart';
+import 'package:movie_app/features/tv_series/presentation/screens/season_details_screen.dart';
 import 'package:movie_app/features/tv_series/presentation/screens/tv_series_all_seasons_screen.dart';
 import 'package:movie_app/features/tv_series/presentation/screens/tv_series_details_screen.dart';
 import 'package:movie_app/main_screen.dart';
@@ -33,6 +34,17 @@ final router = GoRouter(
       builder: (context, state) {
         final details = state.extra as TvSeriesDetails;
         return TvSeriesAllSeasonsScreen(details: details);
+      },
+    ),
+    GoRoute(
+      path: '/tv/:id/seasons/:number',
+      builder: (context, state) {
+        final seriesName = state.extra as String;
+        return SeasonDetailsScreen(
+          seriesId: int.parse(state.pathParameters['id']!),
+          seriesName: seriesName,
+          seasonNumber: int.parse(state.pathParameters['number']!),
+        );
       },
     ),
   ],

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:movie_app/core/constants/api_constants.dart';
+import 'package:movie_app/features/tv_series/data/models/season_details_model.dart';
 import 'package:movie_app/features/tv_series/data/models/tv_series_details_model.dart';
 import 'package:movie_app/features/tv_series/data/models/tv_series_response_model.dart';
 import 'package:retrofit/retrofit.dart';
@@ -24,5 +25,11 @@ abstract class TvSeriesApiService {
   Future<TvSeriesResponseModel> getSimilarTvSeries(
     @Path('id') int id,
     @Query('page') int page,
+  );
+
+  @GET('/tv/{series_id}/season/{season_number}')
+  Future<SeasonDetailsModel> getSeasonDetails(
+    @Path('series_id') int seriesId,
+    @Path('season_number') int seasonNumber,
   );
 }

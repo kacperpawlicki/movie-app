@@ -106,7 +106,8 @@ class TvSeriesDetailsScreen extends StatelessWidget {
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 spacing: 15,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     spacing: 4,
@@ -131,7 +132,9 @@ class TvSeriesDetailsScreen extends StatelessWidget {
                                   Text('●', style: TextStyle(fontSize: 13)),
                                   Text(
                                     '${details.numberOfSeasons} Seasons',
-                                    style: TextStyle(fontWeight: FontWeight.bold),
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                   Text('●', style: TextStyle(fontSize: 13)),
                                   Row(
@@ -149,9 +152,8 @@ class TvSeriesDetailsScreen extends StatelessWidget {
                                               color: Theme.of(
                                                 context,
                                               ).colorScheme.secondaryContainer,
-                                              borderRadius: BorderRadius.circular(
-                                                6,
-                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(6),
                                             ),
                                             child: Text(
                                               item.name.toUpperCase(),
@@ -169,13 +171,13 @@ class TvSeriesDetailsScreen extends StatelessWidget {
                                 ],
                               ),
                             ),
-          
+
                             SizedBox(height: 20),
-          
+
                             Text(details.overview),
-          
+
                             SizedBox(height: 20),
-          
+
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -203,14 +205,20 @@ class TvSeriesDetailsScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
-          
+
                             SeasonCard(
                               season: details.seasons.firstWhere(
                                 (season) => season.seasonNumber == 1,
                               ),
+                              onTap: () {
+                                context.push(
+                                  '/tv/${details.id}/seasons/1',
+                                  extra: details.name,
+                                );
+                              },
                             ),
-          
-                            _similarTvSeriesSection(similarTvSeries)
+
+                            _similarTvSeriesSection(similarTvSeries),
                           ],
                         ),
                       ),
@@ -226,7 +234,6 @@ class TvSeriesDetailsScreen extends StatelessWidget {
     );
   }
 }
-
 
 Widget _similarTvSeriesSection(List<TvSeries> similarTvSeries) {
   return Column(

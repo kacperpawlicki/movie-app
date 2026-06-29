@@ -43,6 +43,8 @@ import 'package:movie_app/features/tv_series/domain/repositories/tv_series_repos
     as _i632;
 import 'package:movie_app/features/tv_series/domain/usecases/get_popular_tv_series_usecase.dart'
     as _i104;
+import 'package:movie_app/features/tv_series/domain/usecases/get_season_details_usecase.dart'
+    as _i842;
 import 'package:movie_app/features/tv_series/domain/usecases/get_similar_tv_series_usecase.dart'
     as _i207;
 import 'package:movie_app/features/tv_series/domain/usecases/get_tv_series_details_usecase.dart'
@@ -51,6 +53,8 @@ import 'package:movie_app/features/tv_series/presentation/bloc/popular_tv_series
     as _i856;
 import 'package:movie_app/features/tv_series/presentation/bloc/popular_tv_series_screen/popular_tv_series_screen_bloc.dart'
     as _i75;
+import 'package:movie_app/features/tv_series/presentation/bloc/season_details/season_details_bloc.dart'
+    as _i452;
 import 'package:movie_app/features/tv_series/presentation/bloc/tv_series_details/tv_series_details_bloc.dart'
     as _i8;
 
@@ -93,6 +97,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i104.GetPopularTvSeriesUseCase>(
       () => _i104.GetPopularTvSeriesUseCase(gh<_i632.TvSeriesRepository>()),
     );
+    gh.factory<_i842.GetSeasonDetailsUsecase>(
+      () => _i842.GetSeasonDetailsUsecase(gh<_i632.TvSeriesRepository>()),
+    );
     gh.factory<_i207.GetSimilarTvSeriesUseCase>(
       () => _i207.GetSimilarTvSeriesUseCase(gh<_i632.TvSeriesRepository>()),
     );
@@ -126,6 +133,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i864.GetMovieDetailsUseCase>(),
         gh<_i90.GetSimilarMoviesUsecase>(),
       ),
+    );
+    gh.factory<_i452.SeasonDetailsBloc>(
+      () => _i452.SeasonDetailsBloc(gh<_i842.GetSeasonDetailsUsecase>()),
     );
     return this;
   }
