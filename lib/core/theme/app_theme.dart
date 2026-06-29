@@ -24,6 +24,8 @@ class AppTheme {
       secondaryContainer: Color.fromARGB(255, 63, 63, 63),
       onSecondaryContainer: Color(0xFFBDBDBD),
 
+      tertiary: Color.fromARGB(255, 237, 193, 193),
+
       surface: Color.fromARGB(255, 40, 40, 40),
       onSurface: Colors.white,
       surfaceContainerHighest: Color(0xFF1C1B1B),
