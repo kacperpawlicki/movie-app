@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/core/widgets/placeholder_screen.dart';
 import 'package:movie_app/features/home/presentation/screens/home_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -11,7 +12,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
 
-  final List<Widget> _screens = [const HomeScreen()];
+  final List<Widget> _screens = [const HomeScreen(), const PlaceholderScreen(), const PlaceholderScreen()];
 
   @override
   Widget build(BuildContext context) {

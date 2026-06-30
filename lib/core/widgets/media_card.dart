@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class MediaCard extends StatelessWidget {
   final String title;
-  final double voteAverage;
+  final double? voteAverage;
   final String? imagePath;
   final VoidCallback onTap;
   final Axis orientation;
@@ -43,39 +43,40 @@ class MediaCard extends StatelessWidget {
                         ),
                       ),
               ),
-              Positioned(
-                left: 6,
-                bottom: 8,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 6,
-                    vertical: 3,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.black.withValues(alpha: 0.4),
-                    borderRadius: BorderRadius.circular(999),
-                    border: Border.all(
-                      color: Colors.white.withValues(alpha: 0.12),
-                      width: 1,
+              if (voteAverage != null)
+                Positioned(
+                  left: 6,
+                  bottom: 8,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6,
+                      vertical: 3,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withValues(alpha: 0.4),
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        color: Colors.white.withValues(alpha: 0.12),
+                        width: 1,
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(Icons.star, color: Colors.amber, size: 15),
+                        const SizedBox(width: 4),
+                        Text(
+                          voteAverage!.toStringAsFixed(1),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(Icons.star, color: Colors.amber, size: 15),
-                      const SizedBox(width: 4),
-                      Text(
-                        voteAverage.toStringAsFixed(1),
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
-              ),
             ],
           ),
           Padding(
