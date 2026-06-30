@@ -23,13 +23,14 @@ Work in progress. Movies and TV series are fully browsable. Actors, searching an
 - Movie details: overview, genres, rating, similar movies
 - TV series details: overview, genres, rating, seasons, similar series
 - Season details with full episode list
+- Favorites, stored locally with sqflite, available offline
 
 ## What's next
 
 - Actors (popular list, details)
-- Favorites, stored locally with sqflite, available offline
 - Searching movies, TV series, and actors
 - Settings (theme, language) via shared_preferences
+- Caching full details for true offline support (currently only basic favorite info is cached)
 
 
 ## Design

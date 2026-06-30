@@ -34,7 +34,7 @@ class MediaCard extends StatelessWidget {
                 child: imagePath != null
                     ? Image.network('$genericPath$imagePath', fit: BoxFit.cover)
                     : AspectRatio(
-                        aspectRatio: 2 / 3, // proporcje plakatu filmowego
+                        aspectRatio: 2 / 3,
                         child: Container(
                           color: Theme.of(
                             context,

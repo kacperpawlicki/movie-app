@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/injection/injection.dart';
 import 'package:movie_app/features/favourites/domain/entities/favourite_item.dart';
 import 'package:movie_app/features/favourites/presentation/bloc/favourites_bloc.dart';
+import 'package:movie_app/features/favourites/presentation/widgets/favourite_item_card.dart';
 
 class FavouritesScreen extends StatelessWidget {
   const FavouritesScreen({super.key});
@@ -36,6 +37,7 @@ class FavouritesScreen extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
+                      SizedBox(height: 25,)
                     ],
                   ),
                 ),
@@ -52,11 +54,23 @@ class FavouritesScreen extends StatelessWidget {
                   ),
 
                 if (favourites.isNotEmpty)
-                  SliverList.separated(
-                    itemCount: favourites.length,
-                    itemBuilder: (context, index) =>
-                        Text(favourites[index].title),
-                    separatorBuilder: (context, index) => SizedBox(height: 10),
+                  SliverPadding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    sliver: SliverGrid(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 16,
+                            mainAxisSpacing: 12,
+                            childAspectRatio: 0.56,
+                          ),
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) => FavouriteItemCard(
+                          item: favourites[index],
+                        ),
+                        childCount: favourites.length,
+                      ),
+                    ),
                   ),
               ],
             ),
