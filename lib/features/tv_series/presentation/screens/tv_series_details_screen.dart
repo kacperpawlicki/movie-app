@@ -36,7 +36,7 @@ class TvSeriesDetailsScreen extends StatelessWidget {
             builder: (context, state) {
               return state.when(
                 loading: () => Center(child: CircularProgressIndicator()),
-                loaded: (details, similarTvSeries) => CustomScrollView(
+                loaded: (details, similarTvSeries, isFavourite) => CustomScrollView(
                   slivers: [
                     SliverAppBar(
                       scrolledUnderElevation: 0,
@@ -68,12 +68,14 @@ class TvSeriesDetailsScreen extends StatelessWidget {
                               context,
                             ).colorScheme.secondaryContainer,
                             child: IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.favorite_border,
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
-                            ),
+                                  onPressed: () {
+                                    context.read<TvSeriesDetailsBloc>().add(TvSeriesDetailsEvent.toggleFavourite(details));
+                                  },
+                                  icon: Icon(
+                                    isFavourite ? Icons.favorite : Icons.favorite_border,
+                                    color: Theme.of(context).colorScheme.primary,
+                                  ),
+                                ),
                           ),
                         ),
                       ],

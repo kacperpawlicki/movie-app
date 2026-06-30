@@ -14,61 +14,30 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TvSeriesDetailsEvent {
 
- int get id;
-/// Create a copy of TvSeriesDetailsEvent
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$TvSeriesDetailsEventCopyWith<TvSeriesDetailsEvent> get copyWith => _$TvSeriesDetailsEventCopyWithImpl<TvSeriesDetailsEvent>(this as TvSeriesDetailsEvent, _$identity);
+
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TvSeriesDetailsEvent&&(identical(other.id, id) || other.id == id));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TvSeriesDetailsEvent);
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id);
+int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'TvSeriesDetailsEvent(id: $id)';
+  return 'TvSeriesDetailsEvent()';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $TvSeriesDetailsEventCopyWith<$Res>  {
-  factory $TvSeriesDetailsEventCopyWith(TvSeriesDetailsEvent value, $Res Function(TvSeriesDetailsEvent) _then) = _$TvSeriesDetailsEventCopyWithImpl;
-@useResult
-$Res call({
- int id
-});
-
-
-
-
-}
-/// @nodoc
-class _$TvSeriesDetailsEventCopyWithImpl<$Res>
-    implements $TvSeriesDetailsEventCopyWith<$Res> {
-  _$TvSeriesDetailsEventCopyWithImpl(this._self, this._then);
-
-  final TvSeriesDetailsEvent _self;
-  final $Res Function(TvSeriesDetailsEvent) _then;
-
-/// Create a copy of TvSeriesDetailsEvent
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,}) {
-  return _then(_self.copyWith(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,
-  ));
-}
-
+class $TvSeriesDetailsEventCopyWith<$Res>  {
+$TvSeriesDetailsEventCopyWith(TvSeriesDetailsEvent _, $Res Function(TvSeriesDetailsEvent) __);
 }
 
 
@@ -86,11 +55,12 @@ extension TvSeriesDetailsEventPatterns on TvSeriesDetailsEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _GetTvSeriesDetails value)?  getTvSeriesDetails,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _GetTvSeriesDetails value)?  getTvSeriesDetails,TResult Function( _ToggleFavourite value)?  toggleFavourite,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _GetTvSeriesDetails() when getTvSeriesDetails != null:
-return getTvSeriesDetails(_that);case _:
+return getTvSeriesDetails(_that);case _ToggleFavourite() when toggleFavourite != null:
+return toggleFavourite(_that);case _:
   return orElse();
 
 }
@@ -108,11 +78,12 @@ return getTvSeriesDetails(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _GetTvSeriesDetails value)  getTvSeriesDetails,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _GetTvSeriesDetails value)  getTvSeriesDetails,required TResult Function( _ToggleFavourite value)  toggleFavourite,}){
 final _that = this;
 switch (_that) {
 case _GetTvSeriesDetails():
-return getTvSeriesDetails(_that);case _:
+return getTvSeriesDetails(_that);case _ToggleFavourite():
+return toggleFavourite(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -129,11 +100,12 @@ return getTvSeriesDetails(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _GetTvSeriesDetails value)?  getTvSeriesDetails,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _GetTvSeriesDetails value)?  getTvSeriesDetails,TResult? Function( _ToggleFavourite value)?  toggleFavourite,}){
 final _that = this;
 switch (_that) {
 case _GetTvSeriesDetails() when getTvSeriesDetails != null:
-return getTvSeriesDetails(_that);case _:
+return getTvSeriesDetails(_that);case _ToggleFavourite() when toggleFavourite != null:
+return toggleFavourite(_that);case _:
   return null;
 
 }
@@ -150,10 +122,11 @@ return getTvSeriesDetails(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int id)?  getTvSeriesDetails,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int id)?  getTvSeriesDetails,TResult Function( TvSeriesDetails details)?  toggleFavourite,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _GetTvSeriesDetails() when getTvSeriesDetails != null:
-return getTvSeriesDetails(_that.id);case _:
+return getTvSeriesDetails(_that.id);case _ToggleFavourite() when toggleFavourite != null:
+return toggleFavourite(_that.details);case _:
   return orElse();
 
 }
@@ -171,10 +144,11 @@ return getTvSeriesDetails(_that.id);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int id)  getTvSeriesDetails,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int id)  getTvSeriesDetails,required TResult Function( TvSeriesDetails details)  toggleFavourite,}) {final _that = this;
 switch (_that) {
 case _GetTvSeriesDetails():
-return getTvSeriesDetails(_that.id);case _:
+return getTvSeriesDetails(_that.id);case _ToggleFavourite():
+return toggleFavourite(_that.details);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -191,10 +165,11 @@ return getTvSeriesDetails(_that.id);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int id)?  getTvSeriesDetails,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int id)?  getTvSeriesDetails,TResult? Function( TvSeriesDetails details)?  toggleFavourite,}) {final _that = this;
 switch (_that) {
 case _GetTvSeriesDetails() when getTvSeriesDetails != null:
-return getTvSeriesDetails(_that.id);case _:
+return getTvSeriesDetails(_that.id);case _ToggleFavourite() when toggleFavourite != null:
+return toggleFavourite(_that.details);case _:
   return null;
 
 }
@@ -209,11 +184,11 @@ class _GetTvSeriesDetails implements TvSeriesDetailsEvent {
   const _GetTvSeriesDetails(this.id);
   
 
-@override final  int id;
+ final  int id;
 
 /// Create a copy of TvSeriesDetailsEvent
 /// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 _$GetTvSeriesDetailsCopyWith<_GetTvSeriesDetails> get copyWith => __$GetTvSeriesDetailsCopyWithImpl<_GetTvSeriesDetails>(this, _$identity);
 
@@ -239,7 +214,7 @@ String toString() {
 /// @nodoc
 abstract mixin class _$GetTvSeriesDetailsCopyWith<$Res> implements $TvSeriesDetailsEventCopyWith<$Res> {
   factory _$GetTvSeriesDetailsCopyWith(_GetTvSeriesDetails value, $Res Function(_GetTvSeriesDetails) _then) = __$GetTvSeriesDetailsCopyWithImpl;
-@override @useResult
+@useResult
 $Res call({
  int id
 });
@@ -258,7 +233,7 @@ class __$GetTvSeriesDetailsCopyWithImpl<$Res>
 
 /// Create a copy of TvSeriesDetailsEvent
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? id = null,}) {
   return _then(_GetTvSeriesDetails(
 null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,
@@ -266,6 +241,81 @@ as int,
 }
 
 
+}
+
+/// @nodoc
+
+
+class _ToggleFavourite implements TvSeriesDetailsEvent {
+  const _ToggleFavourite(this.details);
+  
+
+ final  TvSeriesDetails details;
+
+/// Create a copy of TvSeriesDetailsEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ToggleFavouriteCopyWith<_ToggleFavourite> get copyWith => __$ToggleFavouriteCopyWithImpl<_ToggleFavourite>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ToggleFavourite&&(identical(other.details, details) || other.details == details));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,details);
+
+@override
+String toString() {
+  return 'TvSeriesDetailsEvent.toggleFavourite(details: $details)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ToggleFavouriteCopyWith<$Res> implements $TvSeriesDetailsEventCopyWith<$Res> {
+  factory _$ToggleFavouriteCopyWith(_ToggleFavourite value, $Res Function(_ToggleFavourite) _then) = __$ToggleFavouriteCopyWithImpl;
+@useResult
+$Res call({
+ TvSeriesDetails details
+});
+
+
+$TvSeriesDetailsCopyWith<$Res> get details;
+
+}
+/// @nodoc
+class __$ToggleFavouriteCopyWithImpl<$Res>
+    implements _$ToggleFavouriteCopyWith<$Res> {
+  __$ToggleFavouriteCopyWithImpl(this._self, this._then);
+
+  final _ToggleFavourite _self;
+  final $Res Function(_ToggleFavourite) _then;
+
+/// Create a copy of TvSeriesDetailsEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? details = null,}) {
+  return _then(_ToggleFavourite(
+null == details ? _self.details : details // ignore: cast_nullable_to_non_nullable
+as TvSeriesDetails,
+  ));
+}
+
+/// Create a copy of TvSeriesDetailsEvent
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$TvSeriesDetailsCopyWith<$Res> get details {
+  
+  return $TvSeriesDetailsCopyWith<$Res>(_self.details, (value) {
+    return _then(_self.copyWith(details: value));
+  });
+}
 }
 
 /// @nodoc
@@ -382,11 +432,11 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loading,TResult Function( TvSeriesDetails details,  List<TvSeries> similarTvSeries)?  loaded,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loading,TResult Function( TvSeriesDetails details,  List<TvSeries> similarTvSeries,  bool isFavourite)?  loaded,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Loading() when loading != null:
 return loading();case _Loaded() when loaded != null:
-return loaded(_that.details,_that.similarTvSeries);case _Error() when error != null:
+return loaded(_that.details,_that.similarTvSeries,_that.isFavourite);case _Error() when error != null:
 return error(_that.message);case _:
   return orElse();
 
@@ -405,11 +455,11 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loading,required TResult Function( TvSeriesDetails details,  List<TvSeries> similarTvSeries)  loaded,required TResult Function( String message)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loading,required TResult Function( TvSeriesDetails details,  List<TvSeries> similarTvSeries,  bool isFavourite)  loaded,required TResult Function( String message)  error,}) {final _that = this;
 switch (_that) {
 case _Loading():
 return loading();case _Loaded():
-return loaded(_that.details,_that.similarTvSeries);case _Error():
+return loaded(_that.details,_that.similarTvSeries,_that.isFavourite);case _Error():
 return error(_that.message);case _:
   throw StateError('Unexpected subclass');
 
@@ -427,11 +477,11 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loading,TResult? Function( TvSeriesDetails details,  List<TvSeries> similarTvSeries)?  loaded,TResult? Function( String message)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loading,TResult? Function( TvSeriesDetails details,  List<TvSeries> similarTvSeries,  bool isFavourite)?  loaded,TResult? Function( String message)?  error,}) {final _that = this;
 switch (_that) {
 case _Loading() when loading != null:
 return loading();case _Loaded() when loaded != null:
-return loaded(_that.details,_that.similarTvSeries);case _Error() when error != null:
+return loaded(_that.details,_that.similarTvSeries,_that.isFavourite);case _Error() when error != null:
 return error(_that.message);case _:
   return null;
 
@@ -476,7 +526,7 @@ String toString() {
 
 
 class _Loaded implements TvSeriesDetailsState {
-  const _Loaded({required this.details, required final  List<TvSeries> similarTvSeries}): _similarTvSeries = similarTvSeries;
+  const _Loaded({required this.details, required final  List<TvSeries> similarTvSeries, required this.isFavourite}): _similarTvSeries = similarTvSeries;
   
 
  final  TvSeriesDetails details;
@@ -487,6 +537,7 @@ class _Loaded implements TvSeriesDetailsState {
   return EqualUnmodifiableListView(_similarTvSeries);
 }
 
+ final  bool isFavourite;
 
 /// Create a copy of TvSeriesDetailsState
 /// with the given fields replaced by the non-null parameter values.
@@ -498,16 +549,16 @@ _$LoadedCopyWith<_Loaded> get copyWith => __$LoadedCopyWithImpl<_Loaded>(this, _
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Loaded&&(identical(other.details, details) || other.details == details)&&const DeepCollectionEquality().equals(other._similarTvSeries, _similarTvSeries));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Loaded&&(identical(other.details, details) || other.details == details)&&const DeepCollectionEquality().equals(other._similarTvSeries, _similarTvSeries)&&(identical(other.isFavourite, isFavourite) || other.isFavourite == isFavourite));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,details,const DeepCollectionEquality().hash(_similarTvSeries));
+int get hashCode => Object.hash(runtimeType,details,const DeepCollectionEquality().hash(_similarTvSeries),isFavourite);
 
 @override
 String toString() {
-  return 'TvSeriesDetailsState.loaded(details: $details, similarTvSeries: $similarTvSeries)';
+  return 'TvSeriesDetailsState.loaded(details: $details, similarTvSeries: $similarTvSeries, isFavourite: $isFavourite)';
 }
 
 
@@ -518,7 +569,7 @@ abstract mixin class _$LoadedCopyWith<$Res> implements $TvSeriesDetailsStateCopy
   factory _$LoadedCopyWith(_Loaded value, $Res Function(_Loaded) _then) = __$LoadedCopyWithImpl;
 @useResult
 $Res call({
- TvSeriesDetails details, List<TvSeries> similarTvSeries
+ TvSeriesDetails details, List<TvSeries> similarTvSeries, bool isFavourite
 });
 
 
@@ -535,11 +586,12 @@ class __$LoadedCopyWithImpl<$Res>
 
 /// Create a copy of TvSeriesDetailsState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? details = null,Object? similarTvSeries = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? details = null,Object? similarTvSeries = null,Object? isFavourite = null,}) {
   return _then(_Loaded(
 details: null == details ? _self.details : details // ignore: cast_nullable_to_non_nullable
 as TvSeriesDetails,similarTvSeries: null == similarTvSeries ? _self._similarTvSeries : similarTvSeries // ignore: cast_nullable_to_non_nullable
-as List<TvSeries>,
+as List<TvSeries>,isFavourite: null == isFavourite ? _self.isFavourite : isFavourite // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 

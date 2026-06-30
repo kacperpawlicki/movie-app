@@ -6,6 +6,7 @@ abstract class MovieDetailsState with _$MovieDetailsState {
   const factory MovieDetailsState.loaded({
     required MovieDetails details,
     required List<Movie> similarMovies,
+    required bool isFavourite,
   }) = _Loaded;
   const factory MovieDetailsState.error(String message) = _Error;
 }

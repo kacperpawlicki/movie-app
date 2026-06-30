@@ -1,6 +1,8 @@
+import 'package:injectable/injectable.dart';
 import 'package:movie_app/features/favourites/data/models/favoutire_item_model.dart';
 import 'package:sqflite/sqflite.dart';
 
+@singleton
 class FavouritesLocalDataSource {
   final Database _db;
   
@@ -28,7 +30,7 @@ class FavouritesLocalDataSource {
     return result.isNotEmpty;
   }
 
-  Future<void> removeFavorite(int id, String type) async {
+  Future<void> deleteFavorite(int id, String type) async {
     await _db.delete(
       'favorites',
       where: 'id = ? AND type = ?',

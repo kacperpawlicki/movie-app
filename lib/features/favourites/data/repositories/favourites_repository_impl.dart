@@ -16,9 +16,8 @@ class FavouritesRepositoryImpl implements FavouritesRepository{
   }
 
   @override
-  Future<void> deleteFavourite(int id, MediaType type) {
-    // TODO: implement deleteFavourite
-    throw UnimplementedError();
+  Future<void> deleteFavourite(int id, MediaType type) async {
+    _localDataSource.deleteFavorite(id, type.name);
   }
 
   @override
@@ -29,8 +28,7 @@ class FavouritesRepositoryImpl implements FavouritesRepository{
 
   @override
   Future<bool> isFavourite(int id, MediaType type) {
-    // TODO: implement isFavourite
-    throw UnimplementedError();
+    return _localDataSource.isFavorite(id, type.name);
   }
   
 }

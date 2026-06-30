@@ -6,6 +6,7 @@ abstract class TvSeriesDetailsState with _$TvSeriesDetailsState {
   const factory TvSeriesDetailsState.loaded({
     required TvSeriesDetails details,
     required List<TvSeries> similarTvSeries,
+    required bool isFavourite,
   }) = _Loaded;
   const factory TvSeriesDetailsState.error(String message) = _Error;
 }

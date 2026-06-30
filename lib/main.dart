@@ -6,7 +6,7 @@ import 'package:movie_app/core/theme/app_theme.dart';
 
 void main() async{
   await dotenv.load(fileName: ".env");
-  configureDependencies();
+  await configureDependencies();
   runApp(
     MaterialApp.router(
       routerConfig: router,

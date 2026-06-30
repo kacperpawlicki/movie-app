@@ -50,7 +50,7 @@ class MovieDetailsScreen extends StatelessWidget {
             builder: (context, state) {
               return state.when(
                 loading: () => Center(child: CircularProgressIndicator()),
-                loaded: (MovieDetails details, List<Movie> similarMovies) =>
+                loaded: (MovieDetails details, List<Movie> similarMovies, bool isFavourite) =>
                     CustomScrollView(
                       slivers: [
                         SliverAppBar(
@@ -83,9 +83,11 @@ class MovieDetailsScreen extends StatelessWidget {
                                   context,
                                 ).colorScheme.secondaryContainer,
                                 child: IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    context.read<MovieDetailsBloc>().add(MovieDetailsEvent.toggleFavourite(details));
+                                  },
                                   icon: Icon(
-                                    Icons.favorite_border,
+                                    isFavourite ? Icons.favorite : Icons.favorite_border,
                                     color: Theme.of(context).colorScheme.primary,
                                   ),
                                 ),

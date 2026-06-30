@@ -28,6 +28,8 @@ import 'package:movie_app/features/favourites/domain/usecases/get_favourites_use
     as _i489;
 import 'package:movie_app/features/favourites/domain/usecases/is_favourite_usecase.dart'
     as _i870;
+import 'package:movie_app/features/favourites/presentation/bloc/favourites_bloc.dart'
+    as _i1010;
 import 'package:movie_app/features/movies/data/datasources/movie_api_service.dart'
     as _i756;
 import 'package:movie_app/features/movies/data/datasources/movie_remote_datasource.dart'
@@ -97,6 +99,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i934.TvSeriesRemoteDatasource>(
       () => _i934.TvSeriesRemoteDatasource(gh<_i979.TvSeriesApiService>()),
     );
+    gh.singleton<_i429.FavouritesLocalDataSource>(
+      () => _i429.FavouritesLocalDataSource(gh<_i779.Database>()),
+    );
     gh.singleton<_i1012.FavouritesRepository>(
       () =>
           _i57.FavouritesRepositoryImpl(gh<_i429.FavouritesLocalDataSource>()),
@@ -131,6 +136,18 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i90.GetSimilarMoviesUsecase>(
       () => _i90.GetSimilarMoviesUsecase(gh<_i512.MovieRepository>()),
     );
+    gh.factory<_i1010.FavouritesBloc>(
+      () => _i1010.FavouritesBloc(gh<_i489.GetFavouritesUsecase>()),
+    );
+    gh.factory<_i741.MovieDetailsBloc>(
+      () => _i741.MovieDetailsBloc(
+        gh<_i864.GetMovieDetailsUseCase>(),
+        gh<_i90.GetSimilarMoviesUsecase>(),
+        gh<_i605.AddFavouriteUsecase>(),
+        gh<_i371.DeleteFavouriteUsecase>(),
+        gh<_i870.IsFavouriteUsecase>(),
+      ),
+    );
     gh.factory<_i104.GetPopularTvSeriesUseCase>(
       () => _i104.GetPopularTvSeriesUseCase(gh<_i632.TvSeriesRepository>()),
     );
@@ -152,12 +169,6 @@ extension GetItInjectableX on _i174.GetIt {
       () =>
           _i75.PopularTvSeriesScreenBloc(gh<_i104.GetPopularTvSeriesUseCase>()),
     );
-    gh.factory<_i8.TvSeriesDetailsBloc>(
-      () => _i8.TvSeriesDetailsBloc(
-        gh<_i933.GetTvSeriesDetailsUsecase>(),
-        gh<_i207.GetSimilarTvSeriesUseCase>(),
-      ),
-    );
     gh.factory<_i1028.PopularMoviesPreviewBloc>(
       () =>
           _i1028.PopularMoviesPreviewBloc(gh<_i671.GetPopularMoviesUseCase>()),
@@ -165,10 +176,13 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i128.PopularMoviesScreenBloc>(
       () => _i128.PopularMoviesScreenBloc(gh<_i671.GetPopularMoviesUseCase>()),
     );
-    gh.factory<_i741.MovieDetailsBloc>(
-      () => _i741.MovieDetailsBloc(
-        gh<_i864.GetMovieDetailsUseCase>(),
-        gh<_i90.GetSimilarMoviesUsecase>(),
+    gh.factory<_i8.TvSeriesDetailsBloc>(
+      () => _i8.TvSeriesDetailsBloc(
+        gh<_i933.GetTvSeriesDetailsUsecase>(),
+        gh<_i207.GetSimilarTvSeriesUseCase>(),
+        gh<_i605.AddFavouriteUsecase>(),
+        gh<_i371.DeleteFavouriteUsecase>(),
+        gh<_i870.IsFavouriteUsecase>(),
       ),
     );
     gh.factory<_i452.SeasonDetailsBloc>(
